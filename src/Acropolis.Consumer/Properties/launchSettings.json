@@ -1,0 +1,68 @@
+﻿{
+  "profiles": {
+    "Acropolis.Consumer.CustomerCreated": {
+      "commandName": "Project",
+      "commandLineArgs": "customer-created-consumer",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Acropolis.Consumer.CustomerChanged": {
+      "commandName": "Project",
+      "commandLineArgs": "customer-changed-consumer",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Acropolis.Consumer.CustomerRemoved": {
+      "commandName": "Project",
+      "commandLineArgs": "customer-removed-consumer",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Acropolis.Consumer.ProductCreated": {
+      "commandName": "Project",
+      "commandLineArgs": "product-created-consumer",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Acropolis.Consumer.ProductUpdated": {
+      "commandName": "Project",
+      "commandLineArgs": "product-updated-consumer",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Acropolis.Consumer.ProductChanged": {
+      "commandName": "Project",
+      "commandLineArgs": "product-changed-consumer",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Acropolis.Consumer.ProductRemoved": {
+      "commandName": "Project",
+      "commandLineArgs": "product-removed-consumer",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Acropolis.Consumer.AttributeUpdated": {
+      "commandName": "Project",
+      "commandLineArgs": "attribute-updated-consumer",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

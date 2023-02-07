@@ -1,0 +1,52 @@
+version: '3.4'
+
+services:
+
+  mssql:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: acropolis-mssql
+    environment:
+      SA_PASSWORD: "Develop@123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
+  
+  rabbitmq:
+      image: rabbitmq:3-management
+      ports:
+          - 5672:5672
+          - 15672:15672
+          
+  migrations:
+    container_name: acropolis-migrations
+    env_file:
+      - .env.default
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    depends_on:
+      - mssql
+    command:
+      [
+        "./Scripts/apply-migrations.sh"
+      ]
+
+  integration-tests:
+    container_name: acropolis-integration-tests
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    depends_on:
+      - mssql
+      - migrations
+    env_file:
+      - .env
+    command:
+      [
+        "Scripts/wait-for-it.sh",
+        "mssql:1433",
+        "-t",
+        "30",
+        "--",
+        "./Scripts/start-tests.sh"
+      ]

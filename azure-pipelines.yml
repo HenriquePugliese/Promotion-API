@@ -1,0 +1,57 @@
+trigger:
+  - develop
+  - release/*
+  - main
+
+pr:
+  - develop
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: Main variables for all pipelines
+  - group: sonar-cloud-config
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: henriquepugliese/azure-pipelines-templates
+      endpoint: github.com
+      ref: feature/making-available-any-infra-repository
+
+extends:
+  template: dotnet/web_deploy_webapp.yaml@templates
+  parameters:
+    SonarProject: "henriquepugliese_acropolis"
+    DotnetVersion: "6.0.x"
+    VmImageWin: "windows-2022"
+    VmImageLinux: "ubuntu-latest"
+    ProjectPath: "**/src/Acropolis.Api/Acropolis.Api.csproj"
+    ServiceNameDev: "dev-ws-Acropolis"
+    ServiceNameQa: "hml-ws-Acropolis"
+    ServiceNamePrd: "prd-ws-Acropolis"
+    ServiceResourceGroupDev: "RG-henriquepugliese-Application-DEV"
+    ServiceResourceGroupQa: "RG-henriquepugliese-App-HML"
+    ServiceResourceGroupPrd: "RG-henriquepugliese-App-PRD"
+    ServiceSubscriptionDev: "Juntos Somos Mais - DEV.QA (b3163401-b703-488e-9661-8db29a6ff60c)"
+    ServiceSubscriptionQa: "Juntos Somos Mais - HML (a230c4dc-6d85-49bd-82cd-6e58c84b8313)"
+    ServiceSubscriptionPrd: "Juntos Somos Mais - PRD (25e523f8-a560-48ef-beaf-ecbd05574d5d)"
+    ServiceSlotStaggingNamePrd: "prd-ws-Acropolis-staging"
+    AppSettingsFolder: "src/Acropolis.Api"
+    Migrations: true
+    PlaceHolderKey: "_TAG_VALUE_"
+    NewValue: $(Build.BuildId)-$(Build.SourceVersion)
+    RunJobEks: true
+    HealthCheckUrlDev: "https://dev-api-loja.henriquepugliese.com.br/acropolis/v1/health"
+    HealthCheckUrlQa: "https://hml-api-loja.henriquepugliese.com.br/acropolis/v1/health"
+    HealthCheckUrlPrd: "https://api-loja.henriquepugliese.com.br/acropolis/v1/health"
+    HealthCheckUrlStaging: "https://api-loja.henriquepugliese.com.br/staging/acropolis/health"
+    AppEnvironmentNamePrefixAzureDevOps: "acropolis"
+    SonarTimeoutInMinutes: 8
+    WebBuildTimeoutInMinutes: 14
+    CheckoutAwsSecretKeyValue: true
+    TargetInfraRepositoryName: oia
+    InfraRepositoryTargetBranchPrd: main
